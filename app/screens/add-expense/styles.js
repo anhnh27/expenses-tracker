@@ -1,14 +1,15 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {Fonts, Colors} from '../../themes';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
   },
   textBtn: {
-    ...Fonts.weight500_14,
+    ...Fonts.weight500_16,
     color: 'white',
   },
   bottomArea: {
@@ -44,6 +45,9 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.placeholder,
     paddingLeft: 16,
+    ...Platform.select({
+      ios: {paddingVertical: 12},
+    }),
     ...Fonts.weight300_12,
     color: Colors.text,
   },
@@ -82,5 +86,5 @@ export default styles = StyleSheet.create({
     marginVertical: 8,
     ...Fonts.weight300_12,
     color: Colors.success,
-  }
+  },
 });

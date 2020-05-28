@@ -24,7 +24,7 @@ export default styles = StyleSheet.create({
     marginTop: 24,
   },
   item: {
-    paddingVertical: 12,
+    paddingVertical: 16,
     flexDirection: 'row',
     justifyContent: 'center',
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -58,7 +58,7 @@ export default styles = StyleSheet.create({
   addBtn: {
     position: 'absolute',
     right: 24,
-    bottom: 24,
+    bottom: 60,
     width: 60,
     height: 60,
   },

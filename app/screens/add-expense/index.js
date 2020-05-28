@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {createExpense, resetMutate} from '../../redux/actions/expense';
 import styles from './styles';
 import {Colors} from '../../themes';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Toast = ({show}) => {
   const opacityAnim = new Animated.Value(0);
@@ -75,8 +76,10 @@ export default CreateExpense = () => {
     switch (type) {
       case 'Amount':
         setAmount(value);
+        break;
       case 'Description':
         setDescription(value);
+        break;
     }
   };
 
@@ -88,7 +91,7 @@ export default CreateExpense = () => {
         barStyle="dark-content"
       />
       <Toast show={showToast} />
-      <View style={styles.content}>
+      <ScrollView style={styles.content}>
         <Text style={styles.label}>{'Category'}</Text>
         <View style={styles.picker}>
           <Picker
@@ -123,7 +126,7 @@ export default CreateExpense = () => {
           placeholder={'ex: spend for...'}
           onChangeText={(text) => onChangeText('Description', text)}
         />
-      </View>
+      </ScrollView>
       <View style={styles.bottomArea}>
         <TouchableOpacity
           disabled={!amount?.length}

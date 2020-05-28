@@ -94,7 +94,9 @@ export default Home = ({navigation}) => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
-      <TouchableOpacity style={styles.addBtn} onPress={() => navigation.push('CreateExpense')}>
+      <TouchableOpacity
+        style={styles.addBtn}
+        onPress={() => navigation.push('CreateExpense')}>
         <Image
           source={require('@assets/icons/add.png')}
           style={styles.addImage}
