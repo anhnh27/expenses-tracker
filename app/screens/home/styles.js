@@ -18,7 +18,8 @@ export default styles = StyleSheet.create({
   },
   error: {
     color: Colors.google,
-    ...Fonts.weight500_16,
+    ...Fonts.weight700_24,
+    marginVertical: 8,
   },
   fl: {
     marginTop: 24,

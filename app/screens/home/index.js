@@ -76,6 +76,7 @@ export default Home = ({navigation}) => {
     return (
       <View style={styles.progress}>
         <Text style={styles.error}>{'Oops'}</Text>
+        <Text style={styles.timeoutText}>{error}</Text>
       </View>
     );
   }

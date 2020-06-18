@@ -7,6 +7,7 @@ import {
   CREATE_EXPENSE_FAILURE,
   RESET_MUTATE,
 } from '../actions/expense';
+import {mergeResponse} from '../../utils';
 
 const initialState = {
   list: null,
@@ -51,7 +52,7 @@ export default EXPENSEReducer = (state = initialState, action) => {
     case CREATE_EXPENSE_SUCCESS:
       return {
         ...state,
-        list: action.payload,
+        list: mergeResponse(state.list, action.payload),
         mutateSuccess: true,
         loading: false,
         error: null,

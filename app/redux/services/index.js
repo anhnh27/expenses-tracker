@@ -1,41 +1,50 @@
-//Should put all those urls to constants file in real project.
+import {
+  GET_EXPENSES_ENDPOINT,
+  CREATE_EXPENSES_ENDPOINT,
+} from '../../constants/endpoints';
+import {fetchWithTimeout} from '../../utils';
 
 export const getExpenses = async () => {
   try {
-    const response = await fetch(
-      'https://n9ekzmz317.execute-api.ap-southeast-1.amazonaws.com/getExpenses',
-    );
-    return response.json();
+    const response = await fetchWithTimeout(GET_EXPENSES_ENDPOINT, null, 5000);
+    const json = await response.json();
+    return {
+      ok: true,
+      ...json,
+    };
   } catch (ex) {
-    return ex.message;
+    return {
+      ok: false,
+      message: ex.message,
+    };
   }
 };
 
 export const createExpense = async (expense) => {
   try {
-    const response = await fetch(
-      'https://hyglbc21uj.execute-api.ap-southeast-1.amazonaws.com/default/createExpense',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        method: 'post',
-        body: JSON.stringify(expense),
+    const options = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
+      method: 'post',
+      body: JSON.stringify(expense),
+    };
+
+    const response = await fetchWithTimeout(
+      CREATE_EXPENSES_ENDPOINT,
+      options,
+      1000,
     );
-    const jsonData = await response.json();
-    if(jsonData.success){
-      const newData = await fetch(
-        'https://n9ekzmz317.execute-api.ap-southeast-1.amazonaws.com/getExpenses',
-      );
-      const newDataJson = await newData.json();
-      const finalJson = {...jsonData, ...newDataJson};
-      return finalJson;
-    } else {
-      return jsonData;
-    }
+    const json = await response.json();
+    return {
+      ok: json.success,
+      expense,
+    };
   } catch (ex) {
-    return ex.message;
+    return {
+      ok: false,
+      message: ex.message,
+    };
   }
 };

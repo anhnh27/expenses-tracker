@@ -11,23 +11,23 @@ import {createExpense, getExpenses} from '../services';
 
 function* get() {
   const response = yield call(getExpenses);
-  if (response.data) {
+  if (response.ok) {
     yield put({type: GET_EXPENSES_SUCCESS, payload: response.data});
   } else {
-    yield put({type: GET_EXPENSES_FAILURE, payload: response});
+    yield put({type: GET_EXPENSES_FAILURE, payload: response.message});
   }
 }
 
 function* create(action) {
   const response = yield call(createExpense, action.payload);
-  if (response.success) {
-    yield put({type: CREATE_EXPENSE_SUCCESS, payload: response.data});
+  if (response.ok) {
+    yield put({type: CREATE_EXPENSE_SUCCESS, payload: action.payload});
   } else {
-    yield put({type: CREATE_EXPENSE_FAILURE, payload: response});
+    yield put({type: CREATE_EXPENSE_FAILURE, payload: response.message});
   }
 }
 
-export default function* EXPENSEWatcher() {
+export default function* expensesWatcher() {
   yield takeLatest(GET_EXPENSES, get);
   yield takeLatest(CREATE_EXPENSE, create);
 }
